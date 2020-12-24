@@ -4,8 +4,7 @@
 
 @section('content')
 <x-section-header heading="Profile" breadcrumb="profile" />
-<x-section-sub-header title="Hi! {{ Str::words(auth()->user()->name, 1, '') }}"
-  lead="Change information about yourself on this page." />
+<x-section-sub-header title="Hi! {{ Str::words(auth()->user()->name, 1, '') }}" lead="Change information about yourself on this page." />
 
 <div class="row mt-sm-4">
   <div class="col-12 col-md-12 col-lg-5">
@@ -28,13 +27,13 @@
         </div>
       </div>
       <div class="profile-widget-description">
-        <div class="profile-widget-name">Ujang Maman <div class="text-muted d-inline font-weight-normal">
+        <div class="profile-widget-name">{{ auth()->user()->name }} <div class="text-muted d-inline font-weight-normal">
             <div class="slash"></div> Web Developer
           </div>
         </div>
-        Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character
-        but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in
-        this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Eos a quia repellendus. Accusamus placeat modi natus totam. 
+        Blanditiis labore neque deleniti ea, natus autem voluptates itaque quis inventore totam eum.
       </div>
       <div class="card-footer text-center">
         <div class="font-weight-bold mb-2">Follow Ujang On</div>
@@ -56,6 +55,7 @@
     @include('profile.two-factor-authentication-form')
     @endif
   </div>
+  <!-- Check Fortify Klo available -->
   <div class="col-12 col-md-12 col-lg-7">
     @if (session('status'))
     <div class="alert alert-primary alert-dismissible show fade">

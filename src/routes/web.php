@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FinanceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,11 @@ Route::view('/', 'welcome')->name('welcome');
 Route::middleware('auth', 'verified')->group(function () {
 	Route::view('dashboard', 'dashboard')->name('dashboard');
 	Route::view('profile', 'profile')->name('profile');
+	Route::view('finance', 'finance.finance')->name('finance');
+	Route::view('expanse', 'expanse.expanse')->name('expanse');
+
+	Route::prefix('api')
+		->group(function () {
+			Route::get('finance', [FinanceController::class, 'index'])->name('finance.all');
+		});
 });

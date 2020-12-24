@@ -22,7 +22,9 @@
 <body>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
-      <x-navbar />
+    <!-- Component Navbar nya di sini -->
+      <x-navbar /> 
+      <!-- Component Sidebar nya di sini  -->
       <x-sidebar />
       <div class="main-content">
         <section class="section">
@@ -44,7 +46,7 @@
   <!-- Plugins -->
   @yield('plugin')
   <!-- Page Specific JS File -->
-  @yield('js')
+  @stack('customJS')
   <!-- Template JS File -->
   <script src="{{ asset('stisla/js/scripts.js') }}"></script>
   <script src="{{ asset('stisla/js/custom.js') }}"></script>
