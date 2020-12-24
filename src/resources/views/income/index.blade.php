@@ -61,7 +61,37 @@
     </form>
     {{-- Edit --}}
     <form enctype="multipart/form-data" id="form-edit" method="post">
-       
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            <strong>Success!</strong>Article was added successfully.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="form-group">
+            <label for="nama_barang">Nama Barang:</label>
+            <input type="text" class="form-control" name="nama_barang" id="nama_barang_update">
+        </div>
+        <div class="form-group">
+            <label for="harga_barang">Harga Barang:</label>
+            <input type="text" class="form-control" name="harga_barang" id="harga_barang_update">
+        </div>
+        <div class="form-group">
+            <label for="qty">qty:</label>
+            <input type="text" class="form-control" name="qty_update" id="qty_update">
+        </div>
+        <div class="form-group">
+            <label for="total">total:</label>
+            <input type="text" class="form-control" name="total_update" id="total_update">
+        </div>
+        <div class="form-group">
+            <label for="images">Gambar:</label>
+            <input type="file" class="form-control" name="images_update" id="images_update">
+        </div>
     </form>
 
 @endsection
@@ -248,15 +278,12 @@
                 console.log(form)
             },
             buttons: [{
-                text: 'Tambahkan',
+                text: 'Update',
                 submit: true,
                 class: 'btn btn-success',
-                handler: function(modal) {
-
-                }
+                handler: function(modal) {}
             }]
         });
-
     </script>
 
 @endpush()
