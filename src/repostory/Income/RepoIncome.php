@@ -45,12 +45,13 @@ class RepoIncome implements IncomeContract
      */
     public function store(array $income)
     {
-        $income = new Income();
-        $income->nama_barang = $income['nama_barang'];
-        $income->qty = $income['qty'];
-        $income->images = $income['images'];
-        $income->total = $income['total'];
-        $income->save();
+        Income::create([
+            "nama_barang" => $income['nama_barang'],
+            "harga_barang" => $income['harga_barang'],
+            "images"       => $income['images'],
+            "qty" => $income['qty'],
+            "total" => $income['total'],
+        ]);
     }
 
     /**

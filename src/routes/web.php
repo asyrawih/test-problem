@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExpanseController;
-use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\IncomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,13 +21,12 @@ Route::middleware('auth', 'verified')->group(function () {
 	Route::view('dashboard', 'dashboard')->name('dashboard');
 	Route::view('profile', 'profile')->name('profile');
 
-	Route::prefix('finance')
-		->group(function () {
-			Route::get('/', [FinanceController::class, 'index'])->name('finance');
-		});
+	Route::resource('income', IncomeController::class);
+	Route::resource('expanse', ExpanseController::class);
 
-	Route::prefix('expanse')
-		->group(function () {
-			Route::get('/', [ExpanseController::class, 'index'])->name('expanse');
+
+	Route::prefix('api')
+		->group(function(){
+			Route::get('get-income' , [IncomeController::class , 'getIncome'])->name('income-ajx');
 		});
 });

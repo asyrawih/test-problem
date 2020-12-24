@@ -24,14 +24,14 @@
                         <span>Profile</span>
                     </a>
                 </li>
-                <li class="{{ Route::is('finance') ? 'active' : '' }}">
-                    <a href="{{ route('finance') }}">
+                <li class="{{ Route::is('income') ? 'active' : '' }}">
+                    <a href="{{ route('income.index') }}">
                     <i class="fas fa-user"></i>
-                        <span>Finance</span>
+                        <span>Income</span>
                     </a>
                 </li>
                 <li class="{{ Route::is('expanse') ? 'active' : '' }}">
-                    <a href="{{ route('expanse') }}">
+                    <a href="{{ route('expanse.index') }}">
                         <i class="fas fa-user"></i>
                         <span>Expanse</span>
                     </a>

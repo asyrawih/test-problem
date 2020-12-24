@@ -19,7 +19,7 @@ class CreateIncomesTable extends Migration
             $table->string('nama_barang');
             $table->bigInteger('harga_barang');
             $table->bigInteger('qty');
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->string('total');
             $table->timestamps();
         });

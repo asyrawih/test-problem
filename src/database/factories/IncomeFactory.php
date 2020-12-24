@@ -28,7 +28,7 @@ class IncomeFactory extends Factory
             'harga_barang' => rand(1000, 10000),
             'qty'          => rand(1, 100),
             'total'        => rand(200 , 100),
-            'images'       => 'https://images.unsplash.com/photo-1459802071246-377c0346da93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=652&q=80',
+            'images'       => 'pp.jpeg',
         ];
     }
 }
