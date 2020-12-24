@@ -24,12 +24,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
+                    @foreach ($finances as $key => $finance)
+                        <tr>
+                            <th scope="row">{{ $key + 1 }}</th>
+                            <td>{{ $finance->nama_barang }}</td>
+                            <td>{{ $finance->harga_barang }}</td>
+                            <td>
+                                <img src="{{ $finance->images }}" alt="images" width="80" height="80" />
+                            </td>
+                            <td>{{ $finance->total }}</td>
+                            <td>{{ $finance->customer->nama }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-info mt-2 mb-3" type="button" id="toggle-modal">
+                                    {{ __('Edit') }}
+                                </button>
+                                <button class="btn btn-sm btn-danger mt-2 mb-3" type="button" id="toggle-modal">
+                                    {{ __('Delete') }}
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -95,5 +109,6 @@
                 handler: function(modal) {}
             }]
         });
+
     </script>
 @endpush()

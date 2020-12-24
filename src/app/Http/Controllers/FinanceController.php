@@ -15,6 +15,7 @@ class FinanceController extends Controller
 
     public function index()
     {
-        return $this->finance->all();
+        $finance = $this->finance->all();
+        return view('finance.finance', ['finances' => $finance]);
     }
 }

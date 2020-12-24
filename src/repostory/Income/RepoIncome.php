@@ -20,7 +20,8 @@ class RepoIncome implements IncomeContract
      */
     public function all()
     {
-        return Income::all();
+        return Income::with('customer')
+            ->get();
     }
     /**
      * Show One data
@@ -51,7 +52,7 @@ class RepoIncome implements IncomeContract
         $income->total = $income['total'];
         $income->save();
     }
-    
+
     /**
      * Delete Data
      * @param int $id

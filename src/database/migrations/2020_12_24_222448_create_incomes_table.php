@@ -17,6 +17,7 @@ class CreateIncomesTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->nullable();
             $table->string('nama_barang');
+            $table->bigInteger('harga_barang');
             $table->bigInteger('qty');
             $table->string('images');
             $table->string('total');
