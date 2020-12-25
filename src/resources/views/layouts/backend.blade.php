@@ -46,11 +46,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <!-- Plugins -->
     @yield('plugin')
+    @yield('modal')
+    @stack('js')
     <!-- Page Specific JS File -->
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/js/custom.js') }}"></script>
-    @stack('js')
 </body>
 
 </html>

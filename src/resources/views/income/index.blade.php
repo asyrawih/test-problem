@@ -23,6 +23,9 @@
                         <th scope="col" width="150" class="text-center">Action</th>
                     </tr>
                 </thead>
+                <tbody class="tbody" id="table-body">
+
+                </tbody>
             </table>
         </div>
     </div>
@@ -59,9 +62,31 @@
             <input type="file" class="form-control" name="images" id="images">
         </div>
     </form>
+
+@endsection
+@section('modal')
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
-    <script>
+    <script type="text/javascript">
         $("button#toggle-modal-1").fireModal({
             title: 'Finance Tambah Data',
             body: $("#form-create"),
@@ -84,6 +109,7 @@
                 form_data.append('harga_barang', $('#harga_barang').val())
                 form_data.append('qty', $('#qty').val())
                 form_data.append('total', $('#total').val())
+
                 $.ajax({
                     url: "{{ route('income.store') }}",
                     method: 'post',
@@ -109,7 +135,7 @@
                                 $('.alert-success').hide();
                                 $('#modal-finance').modal('hide');
                                 location.reload();
-                            }, 2000);
+                            }, 1000);
                         }
                     },
                     error: () => {
@@ -129,15 +155,14 @@
                 }
             }]
         });
-
         // Request Income API
         $(document).ready(() => {
             var dataTable = $('.datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 autoWidth: false,
-                pageLength: 2,
-                // scrollX: true,
+                pageLength: 4,
+                //scrollX: true,
                 "order": [
                     [0, "desc"]
                 ],
@@ -179,7 +204,5 @@
                 ]
             });
         })
-
     </script>
-
 @endpush()

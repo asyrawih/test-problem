@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IncomeRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Repostory\Contaract\IncomeContract;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -63,7 +65,6 @@ class IncomeController extends Controller
     public function show($id)
     {
         $income = $this->income->show($id);
-
         return view('income.view', ['income' => $income]);
     }
 
@@ -71,12 +72,14 @@ class IncomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(IncomeRequest $request, $id)
     {
-        //
+        $this->income->update($id, $request->validationData());
+        return new JsonResponse([
+            'status' => 'oke'
+        ]);
     }
 
     /**
@@ -97,8 +100,8 @@ class IncomeController extends Controller
     {
         return DataTables::of($this->income->all())
             ->addColumn('Actions', function ($data) {
-                return '<button class="btn btn-info btn-sm  mt-2 mb-3 data-toggle="modal" data-target="#modalEdit"  data-id="' . $data->id . '">Edit</button>
-                    <button type="button" data-id="' . $data->id . '" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                return '<button type="button" data-id="' . $data->id . '" data-target="#modal-edit"  class="btn btn-info btn-sm edit" id="getEditId">edit</button>
+                        <button type="button" data-id="' . $data->id . '" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->addColumn('Images', function ($data) {
                 return '<img src="' . asset('storage/uploads/' .  $data->images)   . '" alt="" height="80" width="80">';

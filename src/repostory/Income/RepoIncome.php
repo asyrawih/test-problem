@@ -37,7 +37,12 @@ class RepoIncome implements IncomeContract
      */
     public function update(int $id, array $income)
     {
-        return Income::find($id)->update($income);
+        Income::where('id', $id)->update([
+            "nama_barang" => $income['nama_barang'],
+            "harga_barang" => $income['harga_barang'],
+            "qty"      => $income['qty'],
+            "total" => $income['total'],
+        ]);
     }
     /**
      * Storing the Data

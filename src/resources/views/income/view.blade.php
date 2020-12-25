@@ -43,7 +43,8 @@
         </div>
     </div>
     {{-- Modal --}}
-    <form enctype="multipart/form-data" id="form-edit" method="post">
+    <form enctype="multipart/form-data" id="form-edit" method="get">
+        @method('PUT')
         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -57,26 +58,24 @@
         </div>
         <div class="form-group">
             <label for="nama_barang_modal">Nama Barang:</label>
-            <input type="text" class="form-control" name="nama_barang_modal" id="nama_barang_modal"
-                value={{ $income->nama_barang }}>
+            <input type="text" class="form-control" name="nama_barang" id="nama_barang_modal">
         </div>
         <div class="form-group">
             <label for="harga_barang_modal">Harga Barang:</label>
-            <input type="text" class="form-control" name="harga_barang_modal" id="harga_barang_modal"
-                value={{ $income->harga_barang }}>
+            <input type="text" class="form-control" name="harga_barang" id="harga_barang_modal">
         </div>
         <div class="form-group">
             <label for="qty_modal">qty:</label>
-            <input type="text" class="form-control" name="qty_modal" value={{ $income->qty }} id="qty_modal">
+            <input type="text" class="form-control" name="qty" id="qty_modal">
         </div>
         <div class="form-group">
             <label for="total">total:</label>
-            <input type="text" class="form-control" name="total_modal" id="total_modal"
+            <input type="text" class="form-control" name="total" id="total_modal"
                 value={{ $income->qty * $income->harga_barang }} readonly>
         </div>
         <div class="form-group">
             <label for="images_modal">Gambar:</label>
-            <input type="file" class="form-control" name="images_modal" id="images_modal">
+            <input type="file" class="form-control" name="images" id="images_modal">
         </div>
     </form>
 @endsection
@@ -93,19 +92,31 @@
             processData: false,
             enctype: 'multipart/form-data',
             onFormSubmit: async function(modal, e, form) {
+
                 e.preventDefault();
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+                const id = $('input[name=id]').val()
+                let form_data = new FormData();
+                form_data.set('nama_barang', $('#nama_barang_modal').val())
+                form_data.set('harga_barang', $('#harga_barang_modal').val())
+                form_data.set('qty', $('#qty_modal').val())
+                form_data.set('total', $('#total_modal').val())
+
+
                 $.ajax({
-                    url: "{{ route('income.store') }}",
-                    method: 'post',
-                    contentType: false,
-                    processData: false,
-                    enctype: 'multipart/form-data',
-                    data: form_data,
+                    url: "/income/" + id,
+                    method: 'PUT',
+                    data: {
+                        nama_barang: $('#nama_barang_modal').val(),
+                        harga_barang: $('#harga_barang_modal').val(),
+                        qty: $('#qty_modal').val(),
+                        total: $('#total_modal').val(),
+                    },
                     success: function(result) {
                         if (result.errors) {
                             $('.alert-danger').html('');

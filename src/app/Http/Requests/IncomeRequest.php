@@ -28,7 +28,7 @@ class IncomeRequest extends FormRequest
             'harga_barang'  => 'required',
             'qty'           => 'required',
             'total'         => 'required',
-            'images'        => 'required'
+            'images'        => 'nullable'
         ];
     }
 }
