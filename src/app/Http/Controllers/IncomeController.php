@@ -28,6 +28,8 @@ class IncomeController extends Controller
     {
         return view('income.index');
     }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,6 +53,20 @@ class IncomeController extends Controller
             $this->income->store($data);
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Expanse  $expanse
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $income = $this->income->show($id);
+
+        return view('income.view', ['income' => $income]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -81,8 +97,8 @@ class IncomeController extends Controller
     {
         return DataTables::of($this->income->all())
             ->addColumn('Actions', function ($data) {
-                return '<button class="btn btn-secondary trigger--fire-modal-2 trigger--fire-modal-2" type="button" id="toggle-edit" data-id="' . $data->id . '">Edit</button>
-                    <button type="button" data-id="' . $data->id . '" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                return '<button class="btn btn-info btn-sm  mt-2 mb-3 data-toggle="modal" data-target="#modalEdit"  data-id="' . $data->id . '">Edit</button>
+                    <button type="button" data-id="' . $data->id . '" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
             })
             ->addColumn('Images', function ($data) {
                 return '<img src="' . asset('storage/uploads/' .  $data->images)   . '" alt="" height="80" width="80">';

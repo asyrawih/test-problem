@@ -25,7 +25,6 @@
             @yield('content')
         </section>
     </div>
-
     <!-- General JS Scripts -->
     <script src="{{ asset('stisla/modules/jquery.min.js') }}"></script>
     <script src="{{ asset('stisla/modules/popper.js') }}"></script>
@@ -40,10 +39,10 @@
     <!-- Plugins -->
     @yield('plugin')
     <!-- Page Specific JS File -->
-    @yield('js')
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/js/custom.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

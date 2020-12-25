@@ -47,10 +47,10 @@
     <!-- Plugins -->
     @yield('plugin')
     <!-- Page Specific JS File -->
-    @stack('customJS')
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/js/custom.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>
