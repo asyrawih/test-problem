@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Expanse;
 use Illuminate\Http\Request;
+use Repostory\Contaract\ExpanseContract;
+use Yajra\DataTables\DataTables;
 
 class ExpanseController extends Controller
 {
+
+    protected $repo;
+
+    public function __construct(ExpanseContract $repo)
+    {
+        $this->repo = $repo;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -81,5 +92,16 @@ class ExpanseController extends Controller
     public function destroy(Expanse $expanse)
     {
         //
+    }
+
+    public function getExpanseData()
+    {
+
+        return DataTables::of($this->repo->all())
+            ->addColumn('action', function ($expanse) {
+                return '<button type="button" data-id="' . $expanse->id . '" data-target="#modal-expanse"  class="btn btn-info btn-sm edit" id="getEditId">edit</button>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

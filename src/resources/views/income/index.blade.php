@@ -69,13 +69,34 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title" id="header">Test</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    <form>
+                        <div class="form-group">
+                            <label for="nama_barang">Nama Barang:</label>
+                            <input type="text" class="form-control" name="nama_barang" id="nama_barang_modal">
+                        </div>
+                        <div class="form-group">
+                            <label for="harga_barang">Harga Barang:</label>
+                            <input type="text" class="form-control" name="harga_barang" id="harga_barang_modal">
+                        </div>
+                        <div class="form-group">
+                            <label for="qty">qty:</label>
+                            <input type="text" class="form-control" name="qty" id="qty_modal">
+                        </div>
+                        <div class="form-group">
+                            <label for="total">total:</label>
+                            <input type="text" class="form-control" name="total" id="total_modal">
+                        </div>
+                        <div class="form-group">
+                            <label for="images">Gambar:</label>
+                            <input type="file" class="form-control" name="images" id="images_modal">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Save changes</button>
@@ -155,6 +176,7 @@
                 }
             }]
         });
+
         // Request Income API
         $(document).ready(() => {
             var dataTable = $('.datatable').DataTable({
@@ -204,5 +226,33 @@
                 ]
             });
         })
+
+        $('body').on('click', '#getEditId', function() {
+
+            const header = document.querySelector('#header');
+
+            var income_id = $(this).data("id");
+
+            header.innerText = "Edit Data " + income_id
+
+            $('#modal-edit').modal({
+                show: true
+            })
+
+            $.get(`{{ route('income.index') }}/${income_id}`, (data) => {
+                const {
+                    nama_barang,
+                    harga_barang,
+                    qty,
+                    total
+                } = data
+                console.log(data)
+                $('#nama_barang_modal').val(nama_barang);
+                $('#harga_barang_modal').val(harga_barang);
+                $('#qty_modal').val(qty);
+                $('#total_modal').val(total);
+            })
+        })
+
     </script>
 @endpush()

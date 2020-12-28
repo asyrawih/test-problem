@@ -22,7 +22,12 @@ class ExpanseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama_barang' => $this->faker->colorName,
+            'qty'         => rand(2, 10),
+            'images'      => $this->faker->imageUrl(),
+            'nama_sup'    => $this->faker->name,
+            'alamat_sub'  => $this->faker->address,
+            'total'       => rand(200, 300)
         ];
     }
 }

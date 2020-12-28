@@ -65,7 +65,7 @@ class IncomeController extends Controller
     public function show($id)
     {
         $income = $this->income->show($id);
-        return view('income.view', ['income' => $income]);
+        return $income;
     }
 
     /**

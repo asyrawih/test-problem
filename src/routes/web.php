@@ -28,5 +28,6 @@ Route::middleware('auth', 'verified')->group(function () {
 	Route::prefix('api')
 		->group(function(){
 			Route::get('get-income' , [IncomeController::class , 'getIncome'])->name('income-ajx');
+			Route::get('get-expanse' , [ExpanseController::class , 'getExpanseData'])->name('get-expanse-data');
 		});
 });

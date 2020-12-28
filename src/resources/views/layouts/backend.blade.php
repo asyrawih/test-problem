@@ -15,6 +15,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/css/components.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
     <!-- Page Specific CSS File -->
     @yield('css')
 </head>
@@ -42,16 +43,16 @@
     <script src="{{ asset('stisla/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('stisla/modules/moment.min.js') }}"></script>
     <script src="{{ asset('stisla/js/stisla.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
     <!-- Plugins -->
     @yield('plugin')
-    @yield('modal')
-    @stack('js')
     <!-- Page Specific JS File -->
     <!-- Template JS File -->
     <script src="{{ asset('stisla/js/scripts.js') }}"></script>
     <script src="{{ asset('stisla/js/custom.js') }}"></script>
+    @yield('modal')
+    @stack('js')
 </body>
 
 </html>

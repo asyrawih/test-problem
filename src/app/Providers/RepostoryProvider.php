@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Repostory\Contaract\ExpanseContract;
+use Repostory\Contaract\IncomeContract;
+use Repostory\Expanse\RepoExpanse;
 use Repostory\Income\RepoIncome;
 
 class RepostoryProvider extends ServiceProvider
@@ -14,18 +17,7 @@ class RepostoryProvider extends ServiceProvider
      */
     public function register()
     {
-        /**
-         * REGISTER SERVICE PROVIDER / CONTAINER 
-         * Berikan Concrate dalam hal ini Interface
-         * Ketika Interface nya di bind 
-         * Maka Buat instance RepoIncome
-         */
-        $this->app->bind(
-            \Repostory\Contaract\IncomeContract::class,
-            \Repostory\Income\RepoIncome::class,
-            function () {
-                return new RepoIncome();
-            }
-        );
+        $this->app->bind(ExpanseContract::class, RepoExpanse::class);
+        $this->app->bind(IncomeContract::class, RepoIncome::class);
     }
 }

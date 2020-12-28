@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PermissionSeeder::class,
             IncomeSeeder::class,
+            ExpanseSeeder::class,
         ]);
     }
 }
