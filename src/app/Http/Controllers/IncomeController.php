@@ -88,9 +88,9 @@ class IncomeController extends Controller
      * @param  \App\Models\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $this->income->delete($id);
     }
 
     /**

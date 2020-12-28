@@ -75,7 +75,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="update_modal">
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang:</label>
                             <input type="text" class="form-control" name="nama_barang" id="nama_barang_modal">
@@ -99,7 +99,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary saveChanges">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -226,31 +226,70 @@
                 ]
             });
         })
-
+        // Update Data
         $('body').on('click', '#getEditId', function() {
-
             const header = document.querySelector('#header');
-
+            let images_field = document.getElementById("images_modal")
             var income_id = $(this).data("id");
-
-            header.innerText = "Edit Data " + income_id
-
             $('#modal-edit').modal({
                 show: true
             })
-
             $.get(`{{ route('income.index') }}/${income_id}`, (data) => {
                 const {
                     nama_barang,
                     harga_barang,
                     qty,
-                    total
+                    total,
+                    images,
                 } = data
-                console.log(data)
+                header.innerText = "Edit Data " + nama_barang
                 $('#nama_barang_modal').val(nama_barang);
                 $('#harga_barang_modal').val(harga_barang);
                 $('#qty_modal').val(qty);
                 $('#total_modal').val(total);
+
+                $('.saveChanges').click(() => {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: `{{ route('income.index') }}/${income_id}`,
+                        method: 'PUT',
+                        dataType: 'json',
+                        data: $('#update_modal').serialize(),
+                        success: function(result) {
+                            $('#update_modal').trigger('reset')
+                            $('#modal-edit').modal('hide')
+                        },
+                        error: () => {
+                            form.stopProgress();
+                        }
+                    })
+                })
+
+            })
+        })
+
+
+        $('body').on('click', '#getDeleteId', function() {
+            var income_id = $(this).data("id");
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: `{{ route('income.index') }}/${income_id}`,
+                method: 'DELETE',
+                success: function(result) {
+                    confirm('Hapus Data ?')
+                    $('.table').DataTable().ajax.reload()
+                },
+                error: () => {
+                    form.stopProgress();
+                }
             })
         })
 
